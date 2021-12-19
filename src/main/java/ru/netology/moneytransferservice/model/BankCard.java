@@ -3,14 +3,14 @@ package ru.netology.moneytransferservice.model;
 import java.util.Objects;
 
 public class BankCard {
-    private double balance;
-    private final String number;
-    private final String validTill;
-    private final String CVV;
-    private final String name;
-    private final String surname;
+    protected int balance;
+    protected final String number;
+    protected final String validTill;
+    protected final String CVV;
+    protected final String name;
+    protected final String surname;
 
-    public BankCard(double balance, String number, String validTill, String CVV, String name, String surname) {
+    public BankCard(int balance, String number, String validTill, String CVV, String name, String surname) {
         this.balance = balance;
         this.number = number;
         this.validTill = validTill;
@@ -27,11 +27,11 @@ public class BankCard {
         this.surname = surname;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
     }
 
-    public double getBalance() {
+    public int getBalance() {
         return balance;
     }
 

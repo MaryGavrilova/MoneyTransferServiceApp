@@ -14,14 +14,10 @@ public class OperationConfirmation {
     @NotNull(message = "Confirmation code is null")
     @Size(min = 1, message = "Confirmation code is empty")
     @Pattern(regexp = "[0-9]+", message = "Confirmation code contains not only numeric characters")
-    protected String code;
+    protected final String code;
 
     public OperationConfirmation(String operationId, String code) {
         this.operationId = operationId;
-        this.code = code;
-    }
-
-    public void setCode(String code) {
         this.code = code;
     }
 
