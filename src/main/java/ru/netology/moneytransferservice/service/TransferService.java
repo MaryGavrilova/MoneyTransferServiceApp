@@ -11,8 +11,7 @@ import javax.validation.ValidationException;
 import java.time.LocalDate;
 
 import static ru.netology.moneytransferservice.model.TransferRejectionReason.NON;
-import static ru.netology.moneytransferservice.repository.TransferRepository.numberOfAllTransferOperations;
-import static ru.netology.moneytransferservice.repository.TransferRepository.VERIFICATION_CODE;
+import static ru.netology.moneytransferservice.repository.TransferRepository.*;
 
 @Service
 public class TransferService {
@@ -123,7 +122,7 @@ public class TransferService {
 
     //регистрация попытки перевода путем создания операции и присвоения ей уникального номера
     public TransferOperation recordTransferOperation(TransferRequest transferRequest) {
-        String operationId = String.valueOf(++numberOfAllTransferOperations);
+        String operationId = String.valueOf(NUMBER_OF_ALL_TRANSFER_OPERATIONS.incrementAndGet());
         return new TransferOperation(
                 new OperationIdentifier(operationId),
                 transferRequest.getCardFromNumber(),
@@ -160,7 +159,6 @@ public class TransferService {
                 .setBalance(currentBalanceFromBankCard - transferOperation.getAmount().getValue());
 
         int currentBalanceToBankCard = transferRepository.getBankCard(transferOperation.getToBankCardNumber()).getBalance();
-
         transferRepository
                 .getBankCard(transferOperation.getToBankCardNumber())
                 .setBalance(currentBalanceToBankCard + transferOperation.getAmount().getValue() - transferOperation.getCommission());

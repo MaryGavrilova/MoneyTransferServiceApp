@@ -6,6 +6,7 @@ import ru.netology.moneytransferservice.model.*;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
 public class TransferRepository {
@@ -19,11 +20,11 @@ public class TransferRepository {
     public static final double COMMISSION_RATE = 0.01;
 
     // счетчик банковских операций - нужен для присвоения уникального ID операции
-    public static long numberOfAllTransferOperations;
+    public static final AtomicLong NUMBER_OF_ALL_TRANSFER_OPERATIONS = new AtomicLong(0);
 
     // база данных всех банковских карт
     private final Map<String, BankCard> bankCardsDataBase = new ConcurrentHashMap<>(Map.of(
-            "1234567812345678", new BankCard(300, "1234567812345678", "0522", "123", "Mary", "Gavrilova"),
+            "1234567812345678", new BankCard(101, "1234567812345678", "0522", "123", "Mary", "Gavrilova"),
             "5678123456781234", new BankCard(200, "5678123456781234", "0324", "567", "Denis", "Gavrilov")
     ));
 
